@@ -16,8 +16,7 @@
   - `PUT /api/users/<id>` – обновить имя пользователя
   - `DELETE /api/users/<id>` – удалить пользователя
 
-## 🛠 Технологиии
-
+## Технологиии
 
 - Python 3.14
 - Flask
@@ -52,14 +51,23 @@ python app.py
 📁 Структура проекта
 text
 flask-user-manager/
+
 ├── app.py                 # основной файл приложения
+
 ├── requirements.txt       # зависимости
+
 ├── users.db               # база данных SQLite (создаётся автоматически)
+
 ├── templates/             # HTML-шаблоны
+
 │   ├── base.html
+
 │   ├── form.html
+
 │   └── user.html
+
 └── README.md              # этот файл
+
 🔗 Примеры использования API
 Получить всех пользователей
 

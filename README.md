@@ -83,6 +83,3 @@ curl -X DELETE http://127.0.0.1:5000/api/users/1
 
 👤 Автор
 FemLim – justfemlim@gmai.com – https://github.com/FemLim
-
-
-pip freeze > requirements.txt

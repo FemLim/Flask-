@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} Форма ввода данных{% endblock %}
+
+{% block content %}
+<h1>Введите ваше имя</h1>
+
+<form method="POST">
+	<div class="mb-3">
+		<label for="username" class="form-label">Имя:</label>
+		<input type="text" class="form-control" id="username" name="username" placeholder="Например, Иван">
+	</div>
+	{% if error %}
+	<div class="alert alert-danger" role="alert">
+		{{error}}
+	</div>
+	{% endif %}
+	<button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+{% endblock %}

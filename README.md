@@ -17,6 +17,8 @@
   - `DELETE /api/users/<id>` – удалить пользователя
 
 ## 🛠 Технологии
+
+
 - Python 3.14
 - Flask
 - Flask-SQLAlchemy

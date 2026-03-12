@@ -97,7 +97,6 @@ def api_update_user(id):
 	user = User.query.get(id)
 	if user is None:
 		return jsonify({'error': 'User not found'}), 404
-
 	
 	data = request.get_json()
 	name = data['name'].strip() 
@@ -124,4 +123,4 @@ def info():
 	return 'Это страница информации'
 
 if __name__ == '__main__':
-	app.run(debug = True)
+	app.run(debug=True, host='0.0.0.0')

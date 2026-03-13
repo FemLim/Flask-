@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 
 #Создание сайта
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///user.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -109,6 +110,17 @@ def api_update_user(id):
 		'id': user.id,
 		'name': user.name,
 		'date_added': user.date_added.strftime('%d-%m-%Y %H:%M')
+		})
+@app.route('/api/client-info')
+def client_info():
+	client_ip = request.remote_addr
+	client_port = request.environ.get('REMOTE_PORT')
+	user_agent = request.headers.get('User-Agent')
+	return jsonify({
+		'ip': client_ip,
+		'port': client_port,
+		'user_agent': user_agent,
+		'headers': dict(request.headers)
 		})
 
 @app.route('/delete/<int:id>', methods=["POST"])

@@ -1,0 +1,36 @@
+version: '3.8' # Версия синтаксиса Doker Compose
+
+services: 
+  #Сервис базы данных PostgerSQL
+  db:
+    image: postgres:15-alpine # Образ PostgreSQL 15
+    container_name: flask_db # Имя контейнера
+    restart: always # Автоматический перезапуск при сбоях
+    enviroment:
+      POSTGRES_USER: flask_user # Имя пользоваетля БД
+      POSTGRES_PASSWORD: flask_pass # Пароль
+      POSTGRES_DB: flask_db # Имя базы данных
+    ports:
+      - "5432:5432"  #Проброс порта
+    volumes:
+      - postgres_data:/var/lib/postgresql/dat #Том для сохранения данных
+
+  # Сервис веб-приложений Flask
+  web:
+    build: . # Собрать образ из текущей папки
+    container_name: flask_web
+    restart: always
+    ports:
+      -"5000:5000" # Проброс порта Flask
+    depends_on:
+      - db         # Ждать пока db запуститься 
+    enviroment:
+      # Переменные окружжения для подключения к БД
+      DATABASE_URL: postgresql://flask_user:flask_pass@db:5432/flask_db
+      FLASK_ENV: development
+    volumes:
+      - .:/app    # Мотируем текущую папку в /app
+
+      # Определение томов
+volumes:
+  postgres_data: # Том для данных PostgreSQL
